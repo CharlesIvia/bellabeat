@@ -1,4 +1,5 @@
 # IMPORT REQUIRED LIBRARIES
+from os import name
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -66,7 +67,7 @@ print(f"Total Stpes-Calories Corr is {total_steps_calories_corr}")
 ### This shows that there is a large positive correlation between total steps taken and calories burned.
 
 ## Plot data in a scatterplot
-plt.figure(figsize=(10, 4.94), dpi=100)
+plt.figure(figsize=(10, 4.68), dpi=100)
 plt.title("Calories Burned vs Total Steps", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="TotalSteps", y="Calories")
 plt.show()
@@ -83,7 +84,7 @@ print(f"Active Minutes-Calories Corr is {active_caloris_corr}")
 ### This indicates a large positive correlation between the two variables.
 
 ## Plot data in a scatterplot
-plt.figure(figsize=(10, 4.94), dpi=100)
+plt.figure(figsize=(10, 4.68), dpi=100)
 plt.title("Calories Burned vs Very Active Minutes", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="VeryActiveMinutes", y="Calories")
 plt.show()
@@ -97,7 +98,30 @@ print(f"Sedentary-Calories Corr is {sedentary_calories_corr}")
 ### This shows a small negative relationship between time spend sitting/inactive and alories burned
 
 ## Plot data in a scatterplot
-plt.figure(figsize=(10, 4.94), dpi=100)
+plt.figure(figsize=(10, 4.68), dpi=100)
 plt.title("Calories Burned vs Sedentary Minutes", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="SedentaryMinutes", y="Calories")
+plt.show()
+
+
+## Establish the days of the week when individuals are most active
+
+## First, create a new column with ActivityDate represented as day of the week
+
+activity_df["day_of_week"] = activity_df["ActivityDate"].dt.day_name()
+activity_df["day_number"] = activity_df["ActivityDate"].dt.weekday
+print(activity_df)
+
+
+total_steps_per_day = activity_df.groupby(["day_number"])["VeryActiveMinutes"].sum()
+total_steps_per_day = total_steps_per_day.rename_axis("Day").reset_index(
+    name="Total Minutes"
+)
+print(total_steps_per_day)
+week = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sartuday", "Sunday"]
+
+# Visualize the data
+plt.figure(figsize=(10, 4.68), dpi=100)
+plt.title("Most Active Days", pad=20, loc="left")
+sns.barplot(data=total_steps_per_day, x=week, y="Total Minutes")
 plt.show()
