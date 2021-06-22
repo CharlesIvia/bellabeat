@@ -15,7 +15,7 @@ In this stage of the data analysis process, I identify key stakeholders and ask 
 
 > 1. **Urška Sršen:** Bellabeat’s cofounder and Chief Creative Officer. 
 > 2. **Sando Mur:**  Mathematician and Bellabeat’s cofounder; key member of the Bellabeat executive team.
-> 3. **Bellabeat marketing analytics team:**A team of data analysts responsible for collecting, analyzing, and reporting data that helps guide Bellabeat’s marketing strategy.
+> 3. **Bellabeat marketing analytics team:** A team of data analysts responsible for collecting, analyzing, and reporting data that helps guide Bellabeat’s marketing strategy.
 
 >### Bellabeat Products
 
@@ -34,8 +34,13 @@ In this stage of the data analysis process, I identify key stakeholders and ask 
 > 2. How could these trends apply to Bellabeat customers?
 > 3. How could these trends help influence Bellabeat marketing strategy?
 
+## Prepare Phase 
 
+This case study uses public FitBit Fitness Tracker Data. The dataset contains personal fitness tracker data from thirty fitbit users who consnented to the submission of personal tracker data, including minute-level output for physical activity, heart rate, and sleep monitoring. It includes information about daily activity, steps and heart rate, and thus can be used to explore users's habits. The data is made available by Mobius and can be found [here.](https://www.kaggle.com/arashnic/fitbit)
 
+The data is made of up several datasets organized in either long or wide format. However, there are 2 key problems with the data. First, the data is not **recent** as it was collected in 2016. Second, the sample size is too small. Only data for **30** Fitbit users is available yet there are over **30 million** Fitbit users worldwide. 
+
+Given these limitations, additional data is required and insights gained from analyzing available data shall not be taken as conclusive. 
 
 
 
