@@ -49,7 +49,7 @@ print(activity_df.describe())
 ### The purpose of this step is to determine if Total Steps variable can be used in place of Total Distance and vice versa
 
 steps_distance_corr = activity_df["TotalSteps"].corr(activity_df["TotalDistance"])
-print(steps_distance_corr)
+print(f"Total Distance-Total Steps Corr is {steps_distance_corr}")
 
 ### This yields a pearson correlation of 0.9853
 ### This shows a very high positive relationship between Total Distance and Total Steps taken.
@@ -60,7 +60,7 @@ print(steps_distance_corr)
 ### First, get the correlation
 
 total_steps_calories_corr = activity_df["TotalSteps"].corr(activity_df["Calories"])
-print(total_steps_calories_corr)
+print(f"Total Stpes-Calories Corr is {total_steps_calories_corr}")
 
 ### pearson correlation is 0.5916
 ### This shows that there is a large positive correlation between total steps taken and calories burned.
@@ -72,3 +72,32 @@ sns.scatterplot(data=activity_df, x="TotalSteps", y="Calories")
 plt.show()
 
 ### Total Steps and Calories exhibit a linear relationship as shown above.
+
+
+## Establish the relationship between very active minutes and calories burned
+
+active_caloris_corr = activity_df["VeryActiveMinutes"].corr(activity_df["Calories"])
+print(f"Active Minutes-Calories Corr is {active_caloris_corr}")
+
+### pearson correlation is  0.6158.
+### This indicates a large positive correlation between the two variables.
+
+## Plot data in a scatterplot
+plt.figure(figsize=(10, 4.94), dpi=100)
+plt.title("Calories Burned vs Very Active Minutes", pad=20, loc="left")
+sns.scatterplot(data=activity_df, x="VeryActiveMinutes", y="Calories")
+plt.show()
+
+# Establish the relationship between Sedentary minutes and Calories
+
+sedentary_calories_corr = activity_df["SedentaryMinutes"].corr(activity_df["Calories"])
+print(f"Sedentary-Calories Corr is {sedentary_calories_corr}")
+
+### pearson correlation is -0.1069.
+### This shows a small negative relationship between time spend sitting/inactive and alories burned
+
+## Plot data in a scatterplot
+plt.figure(figsize=(10, 4.94), dpi=100)
+plt.title("Calories Burned vs Sedentary Minutes", pad=20, loc="left")
+sns.scatterplot(data=activity_df, x="SedentaryMinutes", y="Calories")
+plt.show()
