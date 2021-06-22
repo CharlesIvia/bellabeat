@@ -8,9 +8,7 @@ import seaborn as sns
 # sns.set_style("darkgrid")
 sns.set_palette("hls")
 
-# READ-IN DATA
-
-# Activity data
+## READ-IN DATA
 activity_df = pd.read_csv("./data/dailyActivity_merged.csv")
 print(activity_df.info())
 print(activity_df.columns)
@@ -23,45 +21,54 @@ print(f"Activity Dataframe \n {activity_df}")
 activity_df["ActivityDate"] = pd.to_datetime(activity_df["ActivityDate"])
 print(activity_df.info())
 
-# Check for null values
+## Check for null values
 
 print(activity_df.isnull().sum())
 
-# From the output, the activity dataframe does not have null values.
+### From the output, the activity dataframe does not have null values.
 
-# Next, check for duplicated rows
+## Next, check for duplicated rows
 
 print(activity_df.duplicated().sum())
 
-# The activity dataframe does not have duplicated rows.
+### The activity dataframe does not have duplicated rows.
 
-# Next, get summary of the data
+## Next, get summary of the data
 
 print(activity_df.describe())
 
-# Key stats from the summary
+## Key stats from the summary
 
-# Average number of steps is 7637.91steps, with a maximum of 36019.00
-# Average distance by an individual is 5.49km with a min of 0 and a maximum of 28.03
-
-# Average amount of calories burned is 2303.61 with a minimum of 0 and a maximum of 4900.00
+### Average number of steps is 7637.91steps, with a maximum of 36019.00
+### Average distance by an individual is 5.49km with a min of 0 and a maximum of 28.03
+### Average amount of calories burned is 2303.61 with a minimum of 0 and a maximum of 4900.00
 
 # ANALYZE DATA
 
-# Establish the relationship between Total Steps and Calories burned
+## Establish the relationship between Total Steps and Total Distance
+### The purpose of this step is to determine if Total Steps variable can be used in place of Total Distance and vice versa
 
-# First, get the correlation
+steps_distance_corr = activity_df["TotalSteps"].corr(activity_df["TotalDistance"])
+print(steps_distance_corr)
+
+### This yields a pearson correlation of 0.9853
+### This shows a very high positive relationship between Total Distance and Total Steps taken.
+### Given the high correlation and that distance is derived from steps, Total Steps shall be used for analysis.
+
+## Establish the relationship between Total Steps and Calories burned
+
+### First, get the correlation
 
 total_steps_calories_corr = activity_df["TotalSteps"].corr(activity_df["Calories"])
 print(total_steps_calories_corr)
 
-# pearson correlation is 0.5916
-# This shows that there is a large positive correlation between total steps taken and calories burned.
+### pearson correlation is 0.5916
+### This shows that there is a large positive correlation between total steps taken and calories burned.
 
-# Plot data in a scatterplot
+## Plot data in a scatterplot
 plt.figure(figsize=(10, 4.94), dpi=100)
 plt.title("Calories Burned vs Total Steps", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="TotalSteps", y="Calories")
 plt.show()
 
-# Total Steps and Calories exhibit a linear relationship as shown above.
+### Total Steps and Calories exhibit a linear relationship as shown above.
