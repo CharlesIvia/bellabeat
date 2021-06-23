@@ -1,7 +1,4 @@
 # IMPORT REQUIRED LIBRARIES
-from os import name
-from numpy.core import numeric
-from numpy.core.fromnumeric import mean
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -69,7 +66,7 @@ print(f"Total Stpes-Calories Corr is {total_steps_calories_corr}")
 ### This shows that there is a large positive correlation between total steps taken and calories burned.
 
 ## Plot data in a scatterplot
-plt.figure(figsize=(8, 4.68), dpi=100)
+plt.figure(figsize=(8, 4.21), dpi=100)
 plt.title("Calories Burned vs Total Steps", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="TotalSteps", y="Calories")
 plt.show()
@@ -86,7 +83,7 @@ print(f"Active Minutes-Calories Corr is {active_caloris_corr}")
 ### This indicates a large positive correlation between the two variables.
 
 ## Plot data in a scatterplot
-plt.figure(figsize=(8, 4.68), dpi=100)
+plt.figure(figsize=(8, 4.21), dpi=100)
 plt.title("Calories Burned vs Very Active Minutes", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="VeryActiveMinutes", y="Calories")
 plt.show()
@@ -100,7 +97,7 @@ print(f"Sedentary-Calories Corr is {sedentary_calories_corr}")
 ### This shows a small negative relationship between time spend sitting/inactive and alories burned
 
 ## Plot data in a scatterplot
-plt.figure(figsize=(8, 4.68), dpi=100)
+plt.figure(figsize=(8, 4.21), dpi=100)
 plt.title("Calories Burned vs Sedentary Minutes", pad=20, loc="left")
 sns.scatterplot(data=activity_df, x="SedentaryMinutes", y="Calories")
 plt.show()
@@ -127,7 +124,7 @@ sum_of_active_minutes_per_day = (
 print(sum_of_active_minutes_per_day)
 
 # Visualize the data
-plt.figure(figsize=(8, 4.68), dpi=100)
+plt.figure(figsize=(8, 4.21), dpi=100)
 plt.title("Total Active Minutes per Day", pad=20, loc="left")
 sns.barplot(data=sum_of_active_minutes_per_day, x=week, y="Minutes")
 plt.show()
@@ -141,7 +138,7 @@ mean_of_active_minutes_per_day = (
 print(mean_of_active_minutes_per_day)
 
 ## Visualize the data
-plt.figure(figsize=(8, 4.68), dpi=100)
+plt.figure(figsize=(8, 4.21), dpi=100)
 plt.title("Average Active Minutes per Day", pad=20, loc="left")
 sns.barplot(data=mean_of_active_minutes_per_day, x=week, y="Minutes")
 plt.show()
@@ -156,3 +153,18 @@ print(activity_df["day_number"].value_counts())
 ### This indicates a variation in the count of days and thus the differences in mean.
 ### This means that we cannot say for sure which day are people most active using the sum.
 ### To get a fair conclusion, we shall rely on the mean.
+
+
+# Find out how movement (measured by total steps) varies per day
+
+steps_per_day = activity_df.groupby(["day_number"])["TotalSteps"]
+average_steps_per_day = (
+    steps_per_day.mean().rename_axis("Day").reset_index(name="Steps")
+)
+print(average_steps_per_day)
+
+## Visualize the data
+plt.figure(figsize=(8, 4.21), dpi=100)
+plt.title("Average Steps per Day", pad=20, loc="left")
+sns.barplot(data=average_steps_per_day, x=week, y="Steps")
+plt.show()
